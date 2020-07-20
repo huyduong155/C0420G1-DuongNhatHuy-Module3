@@ -44,7 +44,7 @@ create table borrow_book(
     primary key (book_id, reader_id),
     foreign key (book_id) references books(id),
     foreign key (reader_id) references readers(id)
-    )
+    );
     
     drop database library_management;
     
