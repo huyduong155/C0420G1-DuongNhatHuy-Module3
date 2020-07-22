@@ -285,14 +285,88 @@ and year(h.ngay_lam_hop_dong) = 2019
 -- TAST 7: Hiển thị thông tin IDDichVu, TenDichVu, DienTich, SoNguoiToiDa, ChiPhiThue, TenLoaiDichVu
 -- của tất cả các loại dịch vụ đã từng được Khách hàng đặt phòng trong năm 2018 nhưng chưa từng được Khách hàng đặt phòng  trong năm 2019.
 
--- select d.id_dich_vu, d.ten_dich_vu, d.dien_tich, d.so_nguoi_toi_da, d.chi_phi_thue, ld.ten_loai_dich_vu
--- from dich_vu d
--- join loai_dich_vu ld on d.id_loai_dich_vu = ld.id_loai_dich_vu
--- where d.id_dich_vu not in (
--- select d.id_dich_vu
--- from dich_vu d
--- join hop_dong h on d.id_dich_vu = h.id_dich_vu
--- where year(h.ngay_lam_hop_dong) = 2019);
+select d.id_dich_vu, d.ten_dich_vu, d.dien_tich, d.so_nguoi_toi_da, d.chi_phi_thue, ld.ten_loai_dich_vu
+from dich_vu d
+join loai_dich_vu ld on d.id_loai_dich_vu = ld.id_loai_dich_vu
+join hop_dong h on d.id_dich_vu = h.id_dich_vu
+where year(h.ngay_lam_hop_dong) = 2018 
+and h.id_dich_vu not in (
+select id_dich_vu
+from hop_dong 
+where year(ngay_lam_hop_dong) = 2019
+);
 
+-- TAST 8: Hiển thị thông tin HoTenKhachHang có trong hệ thống, với yêu cầu HoThenKhachHang không trùng nhau.
+
+-- Cách 1:
+select distinct k.ho_ten
+from khach_hang k;
+
+-- Cách 2:
+select k.ho_ten
+from khach_hang k
+union
+select k.ho_ten
+from khach_hang k;
+
+-- Cách 3:
+select k.ho_ten
+from khach_hang k
+group by k.ho_ten;
+
+-- TAST 9: Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2019 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
+
+select month(ngay_lam_hop_dong) as 'Tháng',count(id_khach_hang) as 'Số lượng khách hàng đặt phòng'
+from hop_dong 
+where year(ngay_lam_hop_dong) = 2019
+group by ngay_lam_hop_dong;
+
+-- TAST 10: Hiển thị thông tin tương ứng với từng Hợp đồng thì đã sử dụng bao nhiêu Dịch vụ đi kèm. Kết quả hiển thị bao gồm IDHopDong, NgayLamHopDong,
+-- NgayKetthuc, TienDatCoc, SoLuongDichVuDiKem (được tính dựa trên việc count các IDHopDongChiTiet).
+
+select h.id_hop_dong, h.ngay_lam_hop_dong, h.ngay_ket_thuc, h.tien_dat_coc, count(hc.id_hop_dong_chi_tiet) as 'số lượng dịch vụ đi kèm'
+from hop_dong h
+join hop_dong_chi_tiet hc on h.id_hop_dong = hc.id_hop_dong
+group by id_hop_dong;
+
+-- TAST 11:	Hiển thị thông tin các Dịch vụ đi kèm đã được sử dụng bởi những Khách hàng có TenLoaiKhachHang là “Diamond” và có địa chỉ là “Vinh” hoặc “Quảng Ngãi”.
+
+select k.ho_ten, k.dia_chi, lk.ten_loai_khach, dv.ten_dich_vu_di_kem
+from khach_hang k
+join loai_khach lk on k.id_loai_khach = lk.id_loai_khach
+left join hop_dong h on k.id_khach_hang = h.id_khach_hang
+left join hop_dong_chi_tiet hc on h.id_hop_dong = hc.id_hop_dong
+left join dich_vu_di_kem dv on hc.id_dich_vu_di_kem = dv.id_dich_vu_di_kem 
+where ten_loai_khach = 'Diamond' and (dia_chi = 'vinh' or dia_chi = 'quang ngai')
+group by ho_ten, ten_dich_vu_di_kem;
+
+-- TAST 12: Hiển thị thông tin IDHopDong, TenNhanVien, TenKhachHang, SoDienThoaiKhachHang, TenDichVu, SoLuongDichVuDikem (được tính dựa trên tổng Hợp đồng chi tiết),
+-- TienDatCoc của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2019 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2019.
+
+select h.id_hop_dong, nv.ho_ten as 'nhân viên', kh.ho_ten as 'khách hàng', kh.SDT, dv.ten_dich_vu, sum(ct.so_luong), h.tien_dat_coc
+from hop_dong h
+join nhan_vien nv on h.id_nhan_vien = nv.id_nhan_vien 
+join khach_hang kh on h.id_khach_hang = kh.id_khach_hang
+join dich_vu dv on h.id_dich_vu = dv.id_dich_vu
+join hop_dong_chi_tiet ct on h.id_hop_dong = ct.id_hop_dong
+where (month(h.ngay_lam_hop_dong) > 9 
+and h.id_hop_dong not in(
+select id_hop_dong
+from hop_dong
+where month(hop_dong.ngay_lam_hop_dong) <10))
+and year(h.ngay_lam_hop_dong) = 2019
+group by id_hop_dong;
+
+-- TAST 13:	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều 
+-- như nhau)
+
+select k.ho_ten, dv.ten_dich_vu_di_kem, count(dv.id_dich_vu_di_kem) as 'a'
+from khach_hang k
+join loai_khach lk on k.id_loai_khach = lk.id_loai_khach
+left join hop_dong h on k.id_khach_hang = h.id_khach_hang
+left join hop_dong_chi_tiet hc on h.id_hop_dong = hc.id_hop_dong
+left join dich_vu_di_kem dv on hc.id_dich_vu_di_kem = dv.id_dich_vu_di_kem 
+where 'a'= (select max('a') from dich_vu_di_kem)
+group by k.ho_ten, ten_dich_vu_di_kem
 
 
