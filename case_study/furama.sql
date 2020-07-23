@@ -360,13 +360,48 @@ group by id_hop_dong;
 -- TAST 13:	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều 
 -- như nhau)
 
-select k.ho_ten, dv.ten_dich_vu_di_kem, count(dv.id_dich_vu_di_kem) as 'a'
-from khach_hang k
-join loai_khach lk on k.id_loai_khach = lk.id_loai_khach
-left join hop_dong h on k.id_khach_hang = h.id_khach_hang
+select  dv.ten_dich_vu_di_kem, count(dv.id_dich_vu_di_kem) as 'số luong lơn nhất'
+from hop_dong h
 left join hop_dong_chi_tiet hc on h.id_hop_dong = hc.id_hop_dong
 left join dich_vu_di_kem dv on hc.id_dich_vu_di_kem = dv.id_dich_vu_di_kem 
-where 'a'= (select max('a') from dich_vu_di_kem)
-group by k.ho_ten, ten_dich_vu_di_kem
+group by  ten_dich_vu_di_kem
+having count(dv.id_dich_vu_di_kem)
+order by count(dv.id_dich_vu_di_kem) desc
+limit 1;
 
+-- TAST 14:	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem,
+-- SoLanSuDung.
 
+select h.id_hop_dong, ldv.ten_loai_dich_vu, dk.ten_dich_vu_di_kem, count(dk.id_dich_vu_di_kem) as 'số lần sử dụng'
+from hop_dong h
+join dich_vu dv on h.id_dich_vu = dv.id_dich_vu
+join loai_dich_vu ldv on dv.id_loai_dich_vu = ldv.id_loai_dich_vu
+join hop_dong_chi_tiet hc on h.id_hop_dong = hc.id_hop_dong
+join dich_vu_di_kem dk on hc.id_dich_vu_di_kem = dk.id_dich_vu_di_kem
+group by dk.ten_dich_vu_di_kem
+having count(dk.id_dich_vu_di_kem) <= 1;
+
+-- TAST 15:	Hiển thi thông tin của tất cả nhân viên bao gồm IDNhanVien, HoTen, TrinhDo, TenBoPhan, SoDienThoai, DiaChi mới chỉ lập được tối đa 3 hợp đồng 
+-- từ năm 2018 đến 2019.
+
+select nv.id_nhan_vien, nv.ho_ten, b.ten_bo_phan, nv.SDT, nv.dia_chi, count(hd.id_nhan_vien) 
+from nhan_vien nv
+join trinh_do td on nv.id_trinh_do = td.id_trinh_do
+join bo_phan b on nv.id_bo_phan = b.id_bo_phan
+join hop_dong hd on nv.id_nhan_vien = hd.id_nhan_vien
+where year(hd.ngay_lam_hop_dong) in (2018, 2019) 
+group by nv.id_nhan_vien
+having  count(hd.id_nhan_vien) <= 3; 
+
+-- TAST 16:	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2017 đến năm 2019.
+
+delete from nhan_vien nv
+where nv.id_nhan_vien not in (
+select id_nhan_vien
+from hop_dong
+where year( hop_dong.ngay_lam_hop_dong) in (2017, 2019));
+
+select nv.id_nhan_vien, nv.ho_ten, count(hd.id_nhan_vien)
+from nhan_vien nv
+left join hop_dong hd on nv.id_nhan_vien = hd.id_nhan_vien
+group by nv.id_nhan_vien
