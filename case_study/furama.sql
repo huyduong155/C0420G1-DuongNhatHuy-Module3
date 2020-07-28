@@ -359,7 +359,8 @@ group by id_hop_dong;
 
 -- TAST 13:	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều 
 -- như nhau)
-
+create view max
+as
 select  dv.ten_dich_vu_di_kem, count(dv.id_dich_vu_di_kem) as 'số luong lơn nhất'
 from hop_dong h
 left join hop_dong_chi_tiet hc on h.id_hop_dong = hc.id_hop_dong
@@ -368,6 +369,11 @@ group by  ten_dich_vu_di_kem
 having count(dv.id_dich_vu_di_kem)
 order by count(dv.id_dich_vu_di_kem) desc
 limit 1;
+
+select *
+from max
+group by ten_dich_vu_di_kem
+having max('số luong lơn nhất');
 
 -- TAST 14:	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem,
 -- SoLanSuDung.
@@ -439,6 +445,18 @@ having sum(hdct.so_luong) > 10) as g );
 -- join hop_dong_chi_tiet hdct on dvdk.id_dich_vu_di_kem = hdct.id_dich_vu_di_kem
 -- group by dvdk.id_dich_vu_di_kem
 -- having sum(hdct.so_luong) > 10 
+
+create view gia
+as
+select dvdk.gia, dvdk.id_dich_vu_di_kem from dich_vu_di_kem dvdk
+join hop_dong_chi_tiet hdct on dvdk.id_dich_vu_di_kem = hdct.id_dich_vu_di_kem
+group by dvdk.id_dich_vu_di_kem
+having sum(hdct.so_luong) > 10;
+
+update dich_vu_di_kem dvdk
+join gia on dvdk.id_dich_vu_di_kem = gia.id_dich_vu_di_kem
+set dvdk.gia = dvdk.gia * 2;
+
 
 -- TAST 20:	Hiển thị thông tin của tất cả các Nhân viên và Khách hàng có trong hệ thống,
 -- thông tin hiển thị bao gồm ID (IDNhanVien, IDKhachHang), HoTen, Email, SoDienThoai, NgaySinh, DiaChi.
