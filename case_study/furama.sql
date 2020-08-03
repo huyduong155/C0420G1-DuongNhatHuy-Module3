@@ -361,24 +361,23 @@ group by id_hop_dong;
 -- như nhau)
 create view max
 as
-select  dv.ten_dich_vu_di_kem, count(dv.id_dich_vu_di_kem) as 'số luong lơn nhất'
+select  dv.ten_dich_vu_di_kem, count(dv.id_dich_vu_di_kem) as 'so_luong_lon_nhat'
 from hop_dong h
 left join hop_dong_chi_tiet hc on h.id_hop_dong = hc.id_hop_dong
 left join dich_vu_di_kem dv on hc.id_dich_vu_di_kem = dv.id_dich_vu_di_kem 
 group by  ten_dich_vu_di_kem
 having count(dv.id_dich_vu_di_kem)
-order by count(dv.id_dich_vu_di_kem) desc
-limit 1;
+order by count(dv.id_dich_vu_di_kem) desc;
 
 select *
 from max
 group by ten_dich_vu_di_kem
-having max('số luong lơn nhất');
+having so_luong_lon_nhat = (select max(so_luong_lon_nhat) from max);
 
 -- TAST 14:	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem,
 -- SoLanSuDung.
 
-select h.id_hop_dong, ldv.ten_loai_dich_vu, dk.ten_dich_vu_di_kem, count(dk.id_dich_vu_di_kem) as 'số lần sử dụng'
+select h.id_hop_dong, ldv.ten_loai_dich_vu, dk.ten_dich_vu_di_kem, count(dk.id_dich_vu_di_kem) as 'so_lan_su_dung'
 from hop_dong h
 join dich_vu dv on h.id_dich_vu = dv.id_dich_vu
 join loai_dich_vu ldv on dv.id_loai_dich_vu = ldv.id_loai_dich_vu
@@ -419,7 +418,7 @@ join hop_dong hd on kh.id_khach_hang = hd.id_khach_hang
 where year(hd.ngay_lam_hop_dong) = 2019 and hd.tong_tien > 10000000 and kh.id_loai_khach = 2
 group by kh.ho_ten, kh.id_loai_khach) as c);
 
--- TAST 18:	Xóa những khách hàng có hợp đồng trước năm 2016 (chú ý ràngbuộc giữa các bảng).
+-- TAST 18:	Xóa những khách hàng có hợp đồng trước năm 2016 (chú ý ràng buộc giữa các bảng).
 
 SET FOREIGN_KEY_CHECKS = 0;
 delete from khach_hang
