@@ -5,7 +5,7 @@
     <title>Product list by name</title>
 </head>
 <body>
-<h1>Product list by name</h1>
+<h1 style="text-align: center">Product list by name</h1>
 <table border="2" style="border-collapse: collapse; text-align: center" width=100% >
     <tr>
         <th>Name</th>

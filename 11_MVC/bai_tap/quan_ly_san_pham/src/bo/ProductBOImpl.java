@@ -1,7 +1,7 @@
-package BO;
+package bo;
 
-import DAO.ProductDao;
-import DAO.ProductDaoImpl;
+import dao.ProductDao;
+import dao.ProductDaoImpl;
 import model.Product;
 
 import java.util.List;

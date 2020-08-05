@@ -1,7 +1,7 @@
 package controller;
 
-import BO.ProductBO;
-import BO.ProductBOImpl;
+import bo.ProductBO;
+import bo.ProductBOImpl;
 import model.Product;
 
 import javax.servlet.RequestDispatcher;
