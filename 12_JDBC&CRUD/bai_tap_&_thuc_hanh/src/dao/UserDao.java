@@ -18,8 +18,6 @@ public class UserDao implements IUserDao {
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set `name` = ?,email= ?, country =? where id = ?;";
     private static final String SELECT_USER_BY_COUNTRY = "select id,`name`,email,country from users where country =?";
-    public void UserDAO() {
-    }
     @Override
     public void insertUser(User user) throws SQLException {
         try {

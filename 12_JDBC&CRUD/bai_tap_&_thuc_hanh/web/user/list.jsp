@@ -5,19 +5,29 @@
     <title>User Management Application</title>
 </head>
 <body>
-<div style="text-align: center">
+<div align="center">
     <h1>User Management</h1>
-    <h3>
-        <a href="/UserServlet?action=create">Add New User</a>
-    </h3>
-    <h3><a href="/UserServlet?action=sort">Sort user by name</a></h3>
+    <table>
+        <tr>
+            <th>
+                <h3>
+                    <a href="/UserServlet?action=create"><input type="submit" value="Add New User"></a>
+                </h3>
+            </th>
+            <th>
+                <h3>
+                    <a href="/UserServlet?action=sort"><input type="submit" value="Sort user by name"></a>
+                </h3>
+            </th>
+        </tr>
+    </table>
     <form action="/UserServlet?action=search" method="post">
         <input type="text" name="country" id="country" placeholder="Search user by country">
         <input type="submit" value="Search">
     </form>
     <p>
         <c:if test="${message != null}">
-            <a href="/UserServlet" class="message">${message}</a>
+            <a href="/UserServlet" class="message"><input type="submit" value="${message}"></a>
         </c:if>
     </p>
 </div>
@@ -39,8 +49,8 @@
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.country}"/></td>
                 <td>
-                    <a href="/UserServlet?action=edit&id=${user.id}">Edit</a>
-                    <a href="/UserServlet?action=delete&id=${user.id}">Delete</a>
+                    <a href="/UserServlet?action=edit&id=${user.id}"><input type="submit" value="Edit"></a>
+                    <a href="/UserServlet?action=delete&id=${user.id}"><input type="submit" value="Delete"></a>
                 </td>
             </tr>
         </c:forEach>

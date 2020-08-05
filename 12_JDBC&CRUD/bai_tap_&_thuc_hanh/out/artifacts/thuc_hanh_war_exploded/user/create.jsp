@@ -7,9 +7,9 @@
 <body>
 <div style="text-align: center">
     <h1>User Management</h1>
-    <h2>
-        <a href="/UserServlet">List All Users</a>
-    </h2>
+    <p>
+        <a href="/UserServlet"><input type="submit" value="List All Users"></a>
+    </p>
 </div>
 <div align="center">
     <form method="post">

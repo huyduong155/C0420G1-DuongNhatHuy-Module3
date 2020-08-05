@@ -6,7 +6,7 @@
 </head>
 <body>
 <p align="center">
-    <a href="/UserServlet">List All Users</a>
+    <a href="/UserServlet"><input type="submit" value="List All Users"></a>
 </p>
 <div align="center">
 <form method="post" style="width: 400px">
@@ -28,7 +28,6 @@
             </tr>
             <tr>
                 <td><input type="submit" value="Delete"></td>
-                <td><a href="/UserServlet">List All Users</a></td>
             </tr>
         </table>
     </fieldset>
