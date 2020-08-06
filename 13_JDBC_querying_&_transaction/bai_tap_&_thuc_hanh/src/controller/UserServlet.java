@@ -90,8 +90,9 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
+        int id = Integer.parseInt(request.getParameter("idPermision"));
         User user = new User(name,email,country);
-        this.iUserBO.insertUser(user);
+        this.iUserBO.insertUser(user,id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/create.jsp");
         request.setAttribute("message","New user was created");
         try {

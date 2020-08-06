@@ -19,7 +19,7 @@ public class UserDao implements IUserDao {
     private static final String UPDATE_USERS_SQL = "update users set `name` = ?,email= ?, country =? where id = ?;";
     private static final String SELECT_USER_BY_COUNTRY = "select id,`name`,email,country from users where country =?";
     @Override
-    public void insertUser(User user) throws SQLException {
+    public void insertUser(User user, int id) throws SQLException {
         try {
             PreparedStatement preparedStatement =this.baseDAO.getConnection().prepareStatement(INSERT_USERS_SQL);
             preparedStatement.setString(1, user.getName());

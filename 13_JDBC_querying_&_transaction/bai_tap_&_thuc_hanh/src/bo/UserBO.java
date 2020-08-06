@@ -12,8 +12,8 @@ public class UserBO implements IUserBO{
     private UserDao userDao = new UserDao();
     private UserCallDao userCallDao = new UserCallDao();
     @Override
-    public void insertUser(User user) throws SQLException {
-        this.userDao.insertUser(user);
+    public void insertUser(User user, int id) throws SQLException {
+        this.userCallDao.insertUser(user,id);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class UserBO implements IUserBO{
 
     @Override
     public List<User> selectUserByCountry(String country) {
-        return this.userDao.selectUserByCountry(country);
+        return this.userCallDao.selectUserByCountry(country);
     }
 
     @Override

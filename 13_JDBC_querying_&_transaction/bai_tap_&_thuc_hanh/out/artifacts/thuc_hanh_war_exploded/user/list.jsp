@@ -16,7 +16,7 @@
             </th>
             <th>
                 <h3>
-                    <a href="/UserServlet?action=sort"><input type="submit" value="Sort user by name"></a>
+                    <a href="/UserServlet?action=sort"><input type="submit" value="Sort User By Name"></a>
                 </h3>
             </th>
         </tr>
