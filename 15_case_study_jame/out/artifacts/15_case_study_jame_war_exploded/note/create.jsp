@@ -9,7 +9,7 @@
     <h1>Note Management</h1>
 </div>
 <div align="center">
-    <a href="/NoteManagementServlet"><input type="submit" value="List Of Note"></a>
+    <a href="/NoteManagementServlet"><input type="submit" value="List All Note"></a>
     <form action="/NoteManagementServlet?action=create" method="post">
         <table border="1" cellpadding="5">
             <caption>
@@ -43,11 +43,12 @@
             <tr>
                 <td colspan="2" align="center">
                     <input type="submit" value="Save"/>
+                    <a href="/NoteManagementServlet"><input type="button" value="Cancel"></a>
                 </td>
             </tr>
         </table>
     </form>
-    <a href="/NoteManagementServlet"><input type="submit" value="Cancel"></a>
+
 </div>
 </body>
 </html>

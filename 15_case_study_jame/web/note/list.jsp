@@ -43,7 +43,7 @@
         <c:forEach var="note" items="${noteList}">
             <tr>
                 <td><c:out value="${note.id}"/></td>
-                <td><c:out value="${note.title}"/></td>
+                <td><a href="/NoteManagementServlet?action=edit&id=${note.id}"><c:out value="${note.title}"/></a></td>
                     <c:forEach var="noteType" items="${noteTypeList}">
                         <c:if test="${note.type_Id == noteType.id_note_type}">
                        <td><c:out value="${noteType.name_type}"/></td>

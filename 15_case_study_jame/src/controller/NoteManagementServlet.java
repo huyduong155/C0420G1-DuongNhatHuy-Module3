@@ -62,7 +62,9 @@ public class NoteManagementServlet extends HttpServlet {
 
     private void deleteNote(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        this.iNoteBo.deleteNote(id);
+        int delete_note = Integer.parseInt(request.getParameter("delete_note"));
+        Note note = new Note(id,delete_note+1);
+        this.iNoteBo.deleteNote(note);
         try {
             response.sendRedirect("/NoteManagementServlet");
         } catch (IOException e) {
@@ -77,12 +79,8 @@ public class NoteManagementServlet extends HttpServlet {
         int typeId = Integer.parseInt(request.getParameter("noteTypeId"));
         Note note = new Note(id,title,content,typeId);
         this.iNoteBo.editNote(note);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("note/edit.jsp");
-        request.setAttribute("message","The note was updateed");
         try {
-            dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
+            response.sendRedirect("/NoteManagementServlet");
         } catch (IOException e) {
             e.printStackTrace();
         }

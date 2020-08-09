@@ -27,9 +27,9 @@ public class NoteBo implements INoteBo {
     }
 
     @Override
-    public boolean deleteNote(int id)
+    public boolean deleteNote(Note note)
     {
-        return noteDao.deleteNote(id);
+        return noteDao.deleteNote(note);
     }
     @Override
     public boolean editNote(Note note) {

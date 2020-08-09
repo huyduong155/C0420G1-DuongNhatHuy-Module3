@@ -12,12 +12,12 @@ import java.util.List;
 
 public class NoteDao implements INoteDao{
     BaseDAO baseDAO = new BaseDAO();
-    private static final String SELECT_ALL_NOTE ="select * from note";
+    private static final String SELECT_ALL_NOTE ="select * from note where  delete_note = 0";
     private static final String SELECT_ALL_TYPE_NOTE ="select id,`name` from note_type";
     private static final String INSERT_NOTE_SQL ="insert into note (title,content,type_id) value (?,?,?)";
-    private static final String SELECT_NOTE_BY_ID ="select id,title,content,type_id from note where id =?";
+    private static final String SELECT_NOTE_BY_ID ="select * from note where id =?";
     private static final String UPDATE_NOTE_SQL = "update note set title = ?,content= ?, type_id =? where id = ?;";
-    private static final String DELETE_NOTE_SQL = "delete from note where id = ?;";
+    private static final String DELETE_NOTE_SQL = "update note set delete_note = ? where id = ?;";
     private static final String SELECT_NOTE_BY_TITLE = "{call search_by_title (?)}";
     @Override
     public List<Note> selectAllNote() {
@@ -32,6 +32,7 @@ public class NoteDao implements INoteDao{
                  note.setTitle(rs.getString("title"));
                  note.setContent(rs.getString("content"));
                  note.setType_Id(rs.getInt("type_id"));
+                 note.setDelete_note(rs.getInt("delete_note"));
                  noteList.add(note);
             }
         } catch (SQLException throwables) {
@@ -68,7 +69,8 @@ public class NoteDao implements INoteDao{
                 String title = rs.getString("title");
                 String content = rs.getString("content");
                 int type_id = rs.getInt("type_id");
-                note = new Note(id,title,content,type_id);
+                int delete_note =rs.getInt("delete_note");
+                note = new Note(id,title,content,type_id,delete_note);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -90,11 +92,12 @@ public class NoteDao implements INoteDao{
     }
 
     @Override
-    public boolean deleteNote(int id) {
+    public boolean deleteNote(Note note) {
         boolean deleteNote = false;
         try {
             PreparedStatement preparedStatement = this.baseDAO.getConnection().prepareStatement(DELETE_NOTE_SQL);
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1,note.getDelete_note());
+            preparedStatement.setInt(2,note.getId());
             deleteNote = preparedStatement.executeUpdate() >0;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

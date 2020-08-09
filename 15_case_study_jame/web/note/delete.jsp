@@ -14,6 +14,9 @@
         <fieldset >
             <legend>Note Management</legend>
             <table>
+                <c:if test="${noteDelete != null}">
+                    <input type="hidden" name="delete_note" value="<c:out value='${noteDelete.delete_note}'></c:out>"/>
+                </c:if>
                 <tr>
                     <td>Title: </td>
                     <td>${noteDelete.title}</td>

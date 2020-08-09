@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee6fbfe3-a911-4534-bccc-9c5c04c6e65b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/case_study/furama.sql" beforeDir="false" afterPath="$PROJECT_DIR$/case_study/furama.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/15_case_study_jame/out/artifacts/15_case_study_jame_war_exploded/note/create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/15_case_study_jame/out/artifacts/15_case_study_jame_war_exploded/note/create.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/15_case_study_jame/web/note/create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/15_case_study_jame/web/note/create.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +81,7 @@
       <workItem from="1595555362290" duration="1591000" />
       <workItem from="1595557278930" duration="57000" />
       <workItem from="1596080542241" duration="229000" />
+      <workItem from="1596979692678" duration="102000" />
     </task>
     <servers />
   </component>
@@ -105,10 +106,10 @@
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state x="530" y="359" key="#Tomcat_Server/0.0.1500.960@0.0.1500.960" timestamp="1595557328110" />
-    <state x="531" y="235" key="FileChooserDialogImpl" timestamp="1595557326261">
+    <state x="531" y="235" key="FileChooserDialogImpl" timestamp="1596979788657">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
-    <state x="531" y="235" key="FileChooserDialogImpl/0.0.1500.960@0.0.1500.960" timestamp="1595557326261" />
+    <state x="531" y="235" key="FileChooserDialogImpl/0.0.1500.960@0.0.1500.960" timestamp="1596979788657" />
     <state x="252" y="124" key="SettingsEditor" timestamp="1596080700855">
       <screen x="0" y="0" width="1500" height="960" />
     </state>

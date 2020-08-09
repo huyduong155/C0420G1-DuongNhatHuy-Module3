@@ -5,15 +5,31 @@ public class Note {
     String title;
     String content;
     int type_Id;
-    int idDelete =0;
+    public int delete_note ;
 
-    public int getIdDelete() {
-        return idDelete;
+
+
+    public Note(int id, int delete_note) {
+        this.id = id;
+        this.delete_note = delete_note;
     }
 
-    public void setIdDelete(int idDelete) {
-        this.idDelete = idDelete;
+    public Note(int id, String title, String content, int type_Id, int delete_note) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.type_Id = type_Id;
+        this.delete_note = delete_note;
     }
+
+    public Note(String title, String content, int type_Id, int delete_note) {
+        this.title = title;
+        this.content = content;
+        this.type_Id = type_Id;
+        this.delete_note = delete_note;
+    }
+
+
 
     public Note() {
     }
@@ -29,6 +45,14 @@ public class Note {
         this.title = title;
         this.content = content;
         this.type_Id = type_Id;
+    }
+
+    public int getDelete_note() {
+        return delete_note;
+    }
+
+    public void setDelete_note(int delete_note) {
+        this.delete_note = delete_note;
     }
 
     public int getId() {
