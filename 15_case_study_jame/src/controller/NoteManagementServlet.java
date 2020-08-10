@@ -34,7 +34,7 @@ public class NoteManagementServlet extends HttpServlet {
                     deleteNote(request,response);
                     break;
                 case "search":
-                    searchNote(request,response);
+//                    searchNote(request,response);
                     break;
                 default:
                     showList(request,response);
@@ -43,22 +43,22 @@ public class NoteManagementServlet extends HttpServlet {
 
     }
 
-    private void searchNote(HttpServletRequest request, HttpServletResponse response) {
-        String title = request.getParameter("title");
-        List<Note> noteList =this.iNoteBo.searchNote(title);
-        List<NoteType> noteTypeList =iNoteBo.selectAllNoteType();
-        RequestDispatcher dispatcher = request.getRequestDispatcher("note/list.jsp");
-        request.setAttribute("noteList",noteList);
-        request.setAttribute("noteTypeList",noteTypeList);
-        request.setAttribute("message","List All Note");
-        try {
-            dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void searchNote(HttpServletRequest request, HttpServletResponse response) {
+//        String title = request.getParameter("title");
+//        List<Note> noteList =this.iNoteBo.searchNote(title);
+//        List<NoteType> noteTypeList =iNoteBo.selectAllNoteType();
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("note/list.jsp");
+//        request.setAttribute("noteList",noteList);
+//        request.setAttribute("noteTypeList",noteTypeList);
+//        request.setAttribute("message","List All Note");
+//        try {
+//            dispatcher.forward(request,response);
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void deleteNote(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -92,16 +92,11 @@ public class NoteManagementServlet extends HttpServlet {
         int type_Id = Integer.parseInt(request.getParameter("noteTypeId"));
         Note note = new Note(title,content,type_Id);
         this.iNoteBo.insertNote(note);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("note/create.jsp");
-        request.setAttribute("message","New Note was created");
         try {
-            dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
+            response.sendRedirect("/NoteManagementServlet");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -111,7 +106,7 @@ public class NoteManagementServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                showCreatNote(request,response);
+//                showCreatNote(request,response);
                 break;
             case "edit":
                 showEditNote(request,response);
@@ -119,8 +114,8 @@ public class NoteManagementServlet extends HttpServlet {
             case "delete":
                 showDeleteNote(request,response);
                 break;
-            case "search":
-
+            case "view":
+                viewNote(request,response);
                 break;
             default:
                 showList(request,response);
@@ -128,10 +123,26 @@ public class NoteManagementServlet extends HttpServlet {
         }
     }
 
+    private void viewNote(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Note note = iNoteBo.selectNote(id);
+        RequestDispatcher dispatcher= request.getRequestDispatcher("note/view.jsp");
+        request.setAttribute("noteView",note);
+        List<NoteType> noteTypeList = iNoteBo.selectAllNoteType();
+        request.setAttribute("noteTypeList",noteTypeList);
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void showDeleteNote(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Note note = iNoteBo.selectNote(id);
-        RequestDispatcher dispatcher= request.getRequestDispatcher("note/delete.jsp");
+        RequestDispatcher dispatcher= request.getRequestDispatcher("note/deleteCss.jsp");
         request.setAttribute("noteDelete",note);
         List<NoteType> noteTypeList = iNoteBo.selectAllNoteType();
         request.setAttribute("noteTypeList",noteTypeList);
@@ -148,7 +159,7 @@ public class NoteManagementServlet extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         Note note = iNoteBo.selectNote(id);
-        RequestDispatcher dispatcher= request.getRequestDispatcher("note/edit.jsp");
+        RequestDispatcher dispatcher= request.getRequestDispatcher("note/editCss.jsp");
         request.setAttribute("noteEdit",note);
         List<NoteType> noteTypeList = iNoteBo.selectAllNoteType();
         request.setAttribute("noteTypeList",noteTypeList);
@@ -161,25 +172,25 @@ public class NoteManagementServlet extends HttpServlet {
         }
     }
 
-    private void showCreatNote(HttpServletRequest request, HttpServletResponse response) {
-        List<NoteType> noteTypeList = iNoteBo.selectAllNoteType();
-        request.setAttribute("noteTypeList",noteTypeList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("note/create.jsp");
-        try {
-            dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void showCreatNote(HttpServletRequest request, HttpServletResponse response) {
+//        List<NoteType> noteTypeList = iNoteBo.selectAllNoteType();
+//        request.setAttribute("noteTypeList",noteTypeList);
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("note/create.jsp");
+//        try {
+//            dispatcher.forward(request,response);
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void showList(HttpServletRequest request, HttpServletResponse response) {
         List<Note> noteList = iNoteBo.selectAllNote();
         List<NoteType> noteTypeList =iNoteBo.selectAllNoteType();
         request.setAttribute("noteList",noteList);
         request.setAttribute("noteTypeList",noteTypeList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("note/list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("note/listCss.jsp");
         try {
             dispatcher.forward(request,response);
     } catch (ServletException e) {
