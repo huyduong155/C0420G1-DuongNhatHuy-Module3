@@ -169,45 +169,65 @@
 <div>
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/KhachHangServlet?action=delete" method="post">
+            <form action="/NhanVienServlet?action=delete" method="post">
                 <div class="modal-header" style="background: #2d3338">
-                    <h4 class="modal-title" style="color: #e9e9e9">Delete Customer</h4>
-                    <a href="/KhachHangServlet"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                    <h4 class="modal-title" style="color: #e9e9e9">Delete Employee</h4>
+                    <a href="/NhanVienServlet"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
                 </div>
                 <div class="modal-body">
                     <table>
                         <tr>
-                            <td><input type="hidden" name="id" value="${cusDelete.id_khach_hang}"></td>
+                            <td><input type="hidden" name="id" value="${employeeDelete.id_nhan_vien}"></td>
                         </tr>
                         <tr>
                             <td>Name : </td>
-                            <td>${cusDelete.ho_ten}</td>
+                            <td>${employeeDelete.ho_ten}</td>
                         </tr>
                         <tr>
                             <td>Date of birth : </td>
-                            <td>${cusDelete.ngay_sinh}</td>
+                            <td>${employeeDelete.ngay_sinh}</td>
                         </tr>
                         <tr>
-                            <td>CMND : </td>
-                            <td>${cusDelete.CMND}</td>
+                            <td>ID Card : </td>
+                            <td>${employeeDelete.CMND}</td>
+                        </tr>
+                        <tr>
+                            <td>Salary : </td>
+                            <td>${employeeDelete.luong}</td>
                         </tr>
                         <tr>
                             <td>Phone : </td>
-                            <td>${cusDelete.SDT}</td>
+                            <td>${employeeDelete.SDT}</td>
                         </tr>
                         <tr>
                             <td>Email : </td>
-                            <td>${cusDelete.email}</td>
+                            <td>${employeeDelete.email}</td>
                         </tr>
                         <tr>
                             <td>Address : </td>
-                            <td>${cusDelete.dia_chi}</td>
+                            <td>${employeeDelete.dia_chi}</td>
                         </tr>
                         <tr>
-                            <td>Customer Type : </td>
-                            <c:forEach var="cusType" items="${listCusType}">
-                                <c:if test="${cusDelete.id_loai_khach == cusType.id_loai_khach}">
-                                    <td><c:out value="${cusType.ten_loai_khach}"></c:out></td>
+                            <td>Position : </td>
+                            <c:forEach var="position" items="${listPosition}">
+                                <c:if test="${employeeDelete.id_vi_tri == position.id_vi_tri}">
+                                    <td><c:out value="${position.ten_vi_tri}"></c:out></td>
+                                </c:if>
+                            </c:forEach>
+                        </tr>
+                        <tr>
+                            <td>Education : </td>
+                            <c:forEach var="education" items="${listEducation}">
+                                <c:if test="${employeeDelete.id_trinh_do == education.id_trinh_do}">
+                                    <td><c:out value="${education.trinh_do}"></c:out></td>
+                                </c:if>
+                            </c:forEach>
+                        </tr>
+                        <tr>
+                            <td>Division : </td>
+                            <c:forEach var="division" items="${listDivision}">
+                                <c:if test="${employeeDelete.id_bo_phan == division.id_bo_phan}">
+                                    <td><c:out value="${division.ten_bo_phan}"></c:out></td>
                                 </c:if>
                             </c:forEach>
                         </tr>
@@ -218,7 +238,7 @@
                     <p class="text-warning"><small>This action cannot be undone.</small></p>
                 </div>
                 <div class="modal-footer">
-                    <a href="/KhachHangServlet"><input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel"></a>
+                    <a href="/NhanVienServlet"><input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel"></a>
                     <input type="submit" class="btn btn-danger" value="Delete">
                 </div>
             </form>

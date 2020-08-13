@@ -9,16 +9,15 @@ public class DTO_nhan_vien {
     private String SDT;
     private String email;
     private String dia_chi;
-    private int id_trinh_do;
-    private int id_vi_tri;
-    private int id_bo_phan;
     private String ten_vi_tri;
     private String trinh_do;
     private String ten_bo_phan;
 
+    public DTO_nhan_vien() {
+    }
+
     public DTO_nhan_vien(int id_nhan_vien, String ho_ten, String ngay_sinh, String CMND, String luong, String SDT,
-                         String email, String dia_chi, int id_trinh_do, int id_vi_tri, int id_bo_phan, String ten_vi_tri,
-                         String trinh_do, String ten_bo_phan) {
+                         String email, String dia_chi, String ten_vi_tri, String trinh_do, String ten_bo_phan) {
         this.id_nhan_vien = id_nhan_vien;
         this.ho_ten = ho_ten;
         this.ngay_sinh = ngay_sinh;
@@ -27,9 +26,6 @@ public class DTO_nhan_vien {
         this.SDT = SDT;
         this.email = email;
         this.dia_chi = dia_chi;
-        this.id_trinh_do = id_trinh_do;
-        this.id_vi_tri = id_vi_tri;
-        this.id_bo_phan = id_bo_phan;
         this.ten_vi_tri = ten_vi_tri;
         this.trinh_do = trinh_do;
         this.ten_bo_phan = ten_bo_phan;
@@ -97,30 +93,6 @@ public class DTO_nhan_vien {
 
     public void setDia_chi(String dia_chi) {
         this.dia_chi = dia_chi;
-    }
-
-    public int getId_trinh_do() {
-        return id_trinh_do;
-    }
-
-    public void setId_trinh_do(int id_trinh_do) {
-        this.id_trinh_do = id_trinh_do;
-    }
-
-    public int getId_vi_tri() {
-        return id_vi_tri;
-    }
-
-    public void setId_vi_tri(int id_vi_tri) {
-        this.id_vi_tri = id_vi_tri;
-    }
-
-    public int getId_bo_phan() {
-        return id_bo_phan;
-    }
-
-    public void setId_bo_phan(int id_bo_phan) {
-        this.id_bo_phan = id_bo_phan;
     }
 
     public String getTen_vi_tri() {

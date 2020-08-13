@@ -2,13 +2,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Delete Customer</title>
+    <title>Edit Customer</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <!-- JS tạo nút bấm di chuyển trang start -->
     <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>
     <!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
@@ -166,60 +166,74 @@
         </div>
     </div>
 </div>
-<div>
+<div >
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/KhachHangServlet?action=delete" method="post">
+            <form action="/NhanVienServlet?action=edit" method="post">
+                <c:if test="${employeeEdit != null}">
+                    <input type="hidden" name="id" value="<c:out value='${employeeEdit.id_nhan_vien}'></c:out>"/>
+                </c:if>
                 <div class="modal-header" style="background: #2d3338">
-                    <h4 class="modal-title" style="color: #e9e9e9">Delete Customer</h4>
-                    <a href="/KhachHangServlet"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                    <h4 class="modal-title" style="color: #e9e9e9">Edit Employee</h4>
+                    <a href="/NhanVienServlet"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
                 </div>
                 <div class="modal-body">
-                    <table>
-                        <tr>
-                            <td><input type="hidden" name="id" value="${cusDelete.id_khach_hang}"></td>
-                        </tr>
-                        <tr>
-                            <td>Name : </td>
-                            <td>${cusDelete.ho_ten}</td>
-                        </tr>
-                        <tr>
-                            <td>Date of birth : </td>
-                            <td>${cusDelete.ngay_sinh}</td>
-                        </tr>
-                        <tr>
-                            <td>CMND : </td>
-                            <td>${cusDelete.CMND}</td>
-                        </tr>
-                        <tr>
-                            <td>Phone : </td>
-                            <td>${cusDelete.SDT}</td>
-                        </tr>
-                        <tr>
-                            <td>Email : </td>
-                            <td>${cusDelete.email}</td>
-                        </tr>
-                        <tr>
-                            <td>Address : </td>
-                            <td>${cusDelete.dia_chi}</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Type : </td>
-                            <c:forEach var="cusType" items="${listCusType}">
-                                <c:if test="${cusDelete.id_loai_khach == cusType.id_loai_khach}">
-                                    <td><c:out value="${cusType.ten_loai_khach}"></c:out></td>
-                                </c:if>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="Name" value="<c:out value='${employeeEdit.ho_ten}'></c:out>">
+                    </div>
+                    <div class="form-group">
+                        <label>Date of birth</label>
+                        <input type="text" class="form-control" name="dateOfBirth" value="<c:out value='${employeeEdit.ngay_sinh}'></c:out>">
+                    </div>
+                    <div class="form-group">
+                        <label>CMND</label>
+                        <input type="text" class="form-control" name="CMND" value="<c:out value='${employeeEdit.CMND}'></c:out>">
+                    </div>
+                    <div class="form-group">
+                        <label>Salary</label>
+                        <input type="text" class="form-control" name="Salary" value="<c:out value='${employeeEdit.luong}'></c:out>">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" class="form-control" name="SDT" value="<c:out value='${employeeEdit.SDT}'></c:out>">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="Email" value="<c:out value='${employeeEdit.email}'></c:out>">
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" name="Address" value="<c:out value='${employeeEdit.dia_chi}'></c:out>">
+                    </div>
+                    <div class="form-group">
+                        <label>Position</label>
+                        <select name="PositionId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="position" items="${listPosition}">
+                                <option value="${position.id_vi_tri}" ><c:out value="${position.ten_vi_tri}"></c:out></option>
                             </c:forEach>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete these Records?</p>
-                    <p class="text-warning"><small>This action cannot be undone.</small></p>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Education</label>
+                        <select name="EducationId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="education" items="${listEducation}">
+                                <option value="${education.id_trinh_do}" ><c:out value="${education.trinh_do}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Division</label>
+                        <select name="DivisionId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="division" items="${listDivision}">
+                                <option value="${division.id_bo_phan}" ><c:out value="${division.ten_bo_phan}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="/KhachHangServlet"><input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel"></a>
-                    <input type="submit" class="btn btn-danger" value="Delete">
+                    <a href="/NhanVienServlet"><input type="button" class="btn btn-secondary"  value="Cancel"></a>
+                    <input type="submit" class="btn btn-primary" value="Save">
                 </div>
             </form>
         </div>

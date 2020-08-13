@@ -5,6 +5,6 @@
     <title>$Title$</title>
   </head>
   <body>
-<c:redirect url="/KhachHangServlet"></c:redirect>
+<c:redirect url="/HomeServlet"></c:redirect>
   </body>
 </html>

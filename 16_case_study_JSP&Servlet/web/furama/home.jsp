@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Employee</title>
+    <title>Home</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
@@ -223,51 +223,15 @@
     <div class="content" style="height: 71vh">
         <div class="container-fluid">
             <div class="row" >
-                <div class="col-2" style="display: flex;flex-direction: column;margin-top: 95px" >
+                <div class="col-2" style="display: flex;flex-direction: column;margin-top: 70px" >
+                    <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Customer</span></a>
                     <a href="#addEmpModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Employee</span></a>
+                    <a href="#addSerModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Service</span></a>
+                    <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Contract</span></a>
+                    <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Contract Detail</span></a>
                 </div>
                 <div class="col-10" style="margin-top: 28px">
-                    <h2 style="color:aliceblue ;text-align: center">List All Employee</h2>
-                    <table class="table table-striped">
-                        <thead class="thead-dark" >
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Date of birth</th>
-                            <th scope="col">ID Card</th>
-                            <th scope="col">Salary</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Position</th>
-                            <th scope="col">Education</th>
-                            <th scope="col">Division</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody style="background-color: #f7f5f2">
-                        <c:forEach var="employee" items="${listEmployee}">
-                            <tr class="contentPage">
-                                <th><c:out value="${employee.id_nhan_vien}"></c:out></th>
-                                <td><span><c:out value="${employee.ho_ten}"></c:out></span></td>
-                                <td><span><c:out value="${employee.ngay_sinh}"></c:out></span></td>
-                                <td><span><c:out value="${employee.CMND}"></c:out></span></td>
-                                <td><span><c:out value="${employee.luong}"></c:out></span></td>
-                                <td><span><c:out value="${employee.SDT}"></c:out></span></td>
-                                <td><span><c:out value="${employee.email}"></c:out></span></td>
-                                <td><span><c:out value="${employee.dia_chi}"></c:out></span></td>
-                                <td><span><c:out value="${employee.ten_vi_tri}"></c:out></span></td>
-                                <td><span><c:out value="${employee.trinh_do}"></c:out></span></td>
-                                <td><span><c:out value="${employee.ten_bo_phan}"></c:out></span></td>
-                                <td>
-                                    <a href="/NhanVienServlet?action=edit&id=${employee.id_nhan_vien}" class="edit" title="Edit" ><i class="material-icons">&#xE254;</i></a>
-                                    <a href="/NhanVienServlet?action=delete&id=${employee.id_nhan_vien}" class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                    <ul id="pagination"></ul>
+
                 </div>
             </div>
         </div>
@@ -276,13 +240,64 @@
     <div class="footer" >
         <div class="container-fluid">
             <div class="row" >
-                <h3></h3>
+                <p></p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- add Modal HTML -->
+<!-- add new customer -->
+<div id="addCusModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/KhachHangServlet?action=create" method="post">
+                <div class="modal-header" style="background: #2d3338">
+                    <h4 class="modal-title" style="color: #e9e9e9">Add New Customer</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name :</label>
+                        <input type="text" class="form-control" name="Name" id="Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Date of birth : </label>
+                        <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth">
+                    </div>
+                    <div class="form-group">
+                        <label>CMND : </label>
+                        <input type="text" class="form-control" name="CMND" id="CMND">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone : </label>
+                        <input type="text" class="form-control" name="SDT" id="SDT">
+                    </div>
+                    <div class="form-group">
+                        <label>Email : </label>
+                        <input type="text" class="form-control" name="Email" id="Email">
+                    </div>
+                    <div class="form-group">
+                        <label>Address : </label>
+                        <input type="text" class="form-control" name="Address" id="Address">
+                    </div>
+                    <div class="form-group">
+                        <label>Customer Type :</label>
+                        <select name="CusTypeId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="CusType" items="${listCusType}">
+                                <option value="${CusType.id_loai_khach}"><c:out value="${CusType.ten_loai_khach}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-primary" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- add new employee -->
 <div id="addEmpModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -341,6 +356,66 @@
                         <select name="DivisionId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <c:forEach var="division" items="${listDivision}">
                                 <option value="${division.id_bo_phan}"><c:out value="${division.ten_bo_phan}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-primary" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%--add new service--%>
+<div id="addSerModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/HomeServlet?action=create" method="post">
+                <div class="modal-header" style="background: #2d3338">
+                    <h4 class="modal-title" style="color: #e9e9e9">Add New Service</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name service:</label>
+                        <input type="text" class="form-control" name="Name" >
+                    </div>
+                    <div class="form-group">
+                        <label>Area : </label>
+                        <input type="text" class="form-control" name="area" >
+                    </div>
+                    <div class="form-group">
+                        <label>Number of floors : </label>
+                        <input type="text" class="form-control" name="floor" >
+                    </div>
+                    <div class="form-group">
+                        <label> Max People : </label>
+                        <input type="text" class="form-control" name="people" >
+                    </div>
+                    <div class="form-group">
+                        <label>Cost : </label>
+                        <input type="text" class="form-control" name="cost" >
+                    </div>
+                    <div class="form-group">
+                        <label> Status : </label>
+                        <input type="text" class="form-control" name="status" >
+                    </div>
+                    <div class="form-group">
+                        <label>Rent Type :</label>
+                        <select name="RentTypeId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="rentType" items="${listRentType}">
+                                <option value="${rentType.id_kieu_thue}"><c:out value="${rentType.ten_kieu_thue}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Service Type :</label>
+                        <select name="SerTypeId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="serType" items="${listSerType}">
+                                <option value="${serType.id_loai_dich_vu}"><c:out value="${serType.ten_loai_dich_vu}"></c:out></option>
                             </c:forEach>
                         </select>
                     </div>

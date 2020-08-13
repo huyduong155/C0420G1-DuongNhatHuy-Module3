@@ -204,7 +204,7 @@
         <div class="row">
             <div class="col-12" >
                 <ul style="list-style: none;display:flex;flex-direction: row;padding-top: 12px">
-                    <li><a href="">Home</a></li>
+                    <li><a href="/HomeServlet">Home</a></li>
                     <li><a href="/NhanVienServlet">Employee</a></li>
                     <li><a href="/KhachHangServlet">Customer</a></li>
                     <li>  <a href="">Service</a></li>
@@ -223,14 +223,11 @@
     <div class="content" style="height: 71vh">
         <div class="container-fluid">
             <div class="row" >
-                <div class="col-2" style="display: flex;flex-direction: column;margin-top: 70px" >
+                <div class="col-2" style="display: flex;flex-direction: column;margin-top: 95px" >
                     <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Customer</span></a>
-                    <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Employee</span></a>
-                    <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Service</span></a>
-                    <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Contract</span></a>
-                    <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Contract Detail</span></a>
                 </div>
                 <div class="col-10" style="margin-top: 28px">
+                    <h2 style="color: aliceblue ;text-align: center">List All Customer</h2>
                     <table class="table table-striped">
                         <thead class="thead-dark" >
                         <tr>
@@ -298,7 +295,7 @@
                         <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth">
                     </div>
                     <div class="form-group">
-                        <label>CMND : </label>
+                        <label>ID Card : </label>
                         <input type="text" class="form-control" name="CMND" id="CMND">
                     </div>
                     <div class="form-group">
@@ -323,8 +320,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-success" value="Add">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-primary" value="Add">
                 </div>
             </form>
         </div>

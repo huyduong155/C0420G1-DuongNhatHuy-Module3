@@ -1,21 +1,34 @@
 package bo;
 
 import dao.NhanVienDao;
-import model.DTO_khach_hang;
-import model.Khach_hang;
-import model.Nhan_vien;
+import model.*;
 
 import java.util.List;
 
 public class NhanVienBo implements INhanVienBo{
     NhanVienDao nhanVienDao = new NhanVienDao();
     @Override
-    public List<DTO_khach_hang> selectAllNhanVien() {
+    public List<DTO_nhan_vien> selectAllNhanVien() {
         return nhanVienDao.selectAllNhanVien();
     }
 
     @Override
-    public Khach_hang selectNhanVien(int id) {
+    public List<Vi_tri> selectAllViTri() {
+        return nhanVienDao.selectAllViTri();
+    }
+
+    @Override
+    public List<Trinh_do> selectAllTrinhDo() {
+        return nhanVienDao.selectAllTrinhDo();
+    }
+
+    @Override
+    public List<Bo_phan> selectAllBoPhan() {
+        return nhanVienDao.selectAllBoPhan();
+    }
+
+    @Override
+    public Nhan_vien selectNhanVien(int id) {
         return nhanVienDao.selectNhanVien(id);
     }
 

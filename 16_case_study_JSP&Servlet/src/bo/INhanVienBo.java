@@ -1,15 +1,15 @@
 package bo;
 
-import model.DTO_khach_hang;
-import model.Khach_hang;
-import model.Nhan_vien;
+import model.*;
 
 import java.util.List;
 
 public interface INhanVienBo {
-    public List<DTO_khach_hang> selectAllNhanVien();
-    //    public List<Loai_khach> selectAllLoaiKhach();
-    public Khach_hang selectNhanVien(int id);
+    public List<DTO_nhan_vien> selectAllNhanVien();
+    public List<Vi_tri> selectAllViTri();
+    public List<Trinh_do> selectAllTrinhDo();
+    public List<Bo_phan> selectAllBoPhan();
+    public Nhan_vien selectNhanVien(int id);
     public void insertNhanVien(Nhan_vien nhanVien);
     public boolean deleteNhanVien(int id);
     public boolean editNhanVien(Nhan_vien nhanVien);

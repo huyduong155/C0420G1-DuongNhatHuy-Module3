@@ -153,8 +153,8 @@
         <div class="row">
             <div class="col-12" >
                 <ul style="list-style: none;display:flex;flex-direction: row;padding-top: 12px">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Employee</a></li>
+                    <li><a href="/HomeServlet">Home</a></li>
+                    <li><a href="/NhanVienServlet">Employee</a></li>
                     <li><a href="/KhachHangServlet">Customer</a></li>
                     <li>  <a href="">Service</a></li>
                     <li><a href="">Contract</a></li>
