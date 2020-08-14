@@ -1,6 +1,7 @@
 package bo;
 
 import model.DTO_khach_hang;
+import model.DTO_khach_hang_dich_vu;
 import model.Khach_hang;
 import model.Loai_khach;
 
@@ -13,4 +14,5 @@ public interface IKhachHangBo {
     public Khach_hang selectKhachHang(int id);
     public boolean editKhachHang(Khach_hang khachHang);
     public boolean deleteKhachHang(int id);
+    public List<DTO_khach_hang_dich_vu> selectAllKhachHangDichVu();
 }

@@ -1,9 +1,11 @@
 package dao;
 
 import model.DTO_khach_hang;
+import model.DTO_khach_hang_dich_vu;
 import model.Khach_hang;
 import model.Loai_khach;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +24,7 @@ public class KhachHangDao implements IKhachHangDao{
     private static final String UPDATE_KH_SQL = "update khach_hang set ho_ten = ?,ngay_sinh= ?, so_CMND = ?,SDT = ?," +
             "email = ?,dia_chi = ?,id_loai_khach = ? where id_khach_hang = ?;";
     private static final String DELETE_KH_SQL = "delete from khach_hang where id_khach_hang = ?";
+    private static final String SELECT_ALL_KH_DV ="{call khachHang_dichVu()}";
     @Override
     public List<DTO_khach_hang> selectAllKhachHang() {
         List<DTO_khach_hang> dtoKhachHangList = new ArrayList<>();
@@ -137,5 +140,26 @@ public class KhachHangDao implements IKhachHangDao{
             throwables.printStackTrace();
         }
         return editCus;
+    }
+
+    @Override
+    public List<DTO_khach_hang_dich_vu> selectAllKhachHangDichVu() {
+        List<DTO_khach_hang_dich_vu> dtoKhachHangDichVuList = new ArrayList<>();
+        try {
+            CallableStatement callableStatement = this.baseDAO.getConnection().prepareCall(SELECT_ALL_KH_DV);
+            ResultSet rs = callableStatement.executeQuery();
+            DTO_khach_hang_dich_vu dtoKhachHangDichVu;
+            while (rs.next()){
+                dtoKhachHangDichVu = new DTO_khach_hang_dich_vu();
+                dtoKhachHangDichVu.setId_khach_hang(rs.getInt("id_khach_hang"));
+                dtoKhachHangDichVu.setTen_khach_hang(rs.getString("ho_ten"));
+                dtoKhachHangDichVu.setTen_dich_vu(rs.getString("ten_dich_vu"));
+                dtoKhachHangDichVu.setTen_dich_vu_di_kem(rs.getString("ten_dich_vu_di_kem"));
+                dtoKhachHangDichVuList.add(dtoKhachHangDichVu);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return dtoKhachHangDichVuList;
     }
 }

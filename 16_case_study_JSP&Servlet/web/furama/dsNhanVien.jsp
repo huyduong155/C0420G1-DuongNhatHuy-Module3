@@ -298,23 +298,23 @@
                     </div>
                     <div class="form-group">
                         <label>Date of birth : </label>
-                        <input type="text" class="form-control" name="dateOfBirth" >
+                        <input type="text" class="form-control" name="dateOfBirth" placeholder="yyyy-mm-dd" pattern="(19[0-9][0-9]|20(00|01|02))-[0-9]{2}-[0-9]{2}">
                     </div>
                     <div class="form-group">
                         <label>ID Card : </label>
-                        <input type="text" class="form-control" name="CMND" >
+                        <input type="text" class="form-control" name="CMND" pattern="[\\d]{9}]|[\\d]{12}]" title="Format id card: xxxxxxxxx or xxxxxxxxxxxx">
                     </div>
                     <div class="form-group">
                         <label>Salary : </label>
-                        <input type="text" class="form-control" name="Salary" >
+                        <input type="text" class="form-control" name="Salary" pattern="[1-9]\d*" title="The number > 0">
                     </div>
                     <div class="form-group">
                         <label>Phone : </label>
-                        <input type="text" class="form-control" name="SDT" >
+                        <input type="text" class="form-control" name="SDT" pattern="(090|091)[\d]{7}" title="Phone number is not format " >
                     </div>
                     <div class="form-group">
                         <label>Email : </label>
-                        <input type="text" class="form-control" name="Email" >
+                        <input type="text" class="form-control" name="Email" placeholder="abc@abc.abc" pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)" title="email is not format">
                     </div>
                     <div class="form-group">
                         <label>Address : </label>

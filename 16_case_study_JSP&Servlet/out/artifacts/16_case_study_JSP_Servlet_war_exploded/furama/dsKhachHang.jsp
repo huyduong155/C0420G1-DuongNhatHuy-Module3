@@ -292,19 +292,19 @@
                     </div>
                     <div class="form-group">
                         <label>Date of birth : </label>
-                        <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth">
+                        <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="yyyy-mm-dd" pattern="(19[0-9][0-9]|20(00|01|02))-[0-9]{2}-[0-9]{2}">
                     </div>
                     <div class="form-group">
                         <label>ID Card : </label>
-                        <input type="text" class="form-control" name="CMND" id="CMND">
+                        <input type="text" class="form-control" name="CMND" id="CMND" pattern="\d{9}|\d{12}" title="Format id card: xxxxxxxxx or xxxxxxxxxxxx">
                     </div>
                     <div class="form-group">
                         <label>Phone : </label>
-                        <input type="text" class="form-control" name="SDT" id="SDT">
+                        <input type="text" class="form-control" name="SDT" id="SDT" placeholder="09xx" pattern="(090|091)[\d]{7}" title="Phone number is not format ">
                     </div>
                     <div class="form-group">
                         <label>Email : </label>
-                        <input type="text" class="form-control" name="Email" id="Email">
+                        <input type="text" class="form-control" name="Email" id="Email" placeholder="abc@abc.abc" pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)" title="Email is not format">
                     </div>
                     <div class="form-group">
                         <label>Address : </label>

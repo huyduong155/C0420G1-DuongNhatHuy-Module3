@@ -223,15 +223,36 @@
     <div class="content" style="height: 71vh">
         <div class="container-fluid">
             <div class="row" >
-                <div class="col-2" style="display: flex;flex-direction: column;margin-top: 70px" >
+                <div class="col-2" style="display: flex;flex-direction: column;margin-top: 85px" >
                     <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Customer</span></a>
                     <a href="#addEmpModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Employee</span></a>
                     <a href="#addSerModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Service</span></a>
-                    <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Contract</span></a>
-                    <a href="#addCusModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Contract Detail</span></a>
+                    <a href="#addContractModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Contract</span></a>
+                    <a href="#addContDetailModal" class="btn btn-primary" data-toggle="modal" style="margin: 3px"><i class="fa fa-plus"></i> <span>Add New Contract Detail</span></a>
                 </div>
                 <div class="col-10" style="margin-top: 28px">
-
+                    <h2 style="color: aliceblue ;text-align: center">List All Customers Use Services</h2>
+                    <table class="table table-striped">
+                        <thead class="thead-dark" >
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name customer</th>
+                            <th scope="col">Name service</th>
+                            <th scope="col">Name attach service</th>
+                        </tr>
+                        </thead>
+                        <tbody style="background-color: #f7f5f2">
+                        <c:forEach var="cusService" items="${listCusService}">
+                            <tr class="contentPage">
+                                <th><c:out value="${cusService.id_khach_hang}"></c:out></th>
+                                <td><span><c:out value="${cusService.ten_khach_hang}"></c:out></span></td>
+                                <td><span><c:out value="${cusService.ten_dich_vu}"></c:out></span></td>
+                                <td><span><c:out value="${cusService.ten_dich_vu_di_kem}"></c:out></span></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <ul id="pagination"></ul>
                 </div>
             </div>
         </div>
@@ -262,19 +283,19 @@
                     </div>
                     <div class="form-group">
                         <label>Date of birth : </label>
-                        <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth">
+                        <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="yyyy-mm-dd" pattern="(19[0-9][0-9]|20(00|01|02))-[0-9]{2}-[0-9]{2}">
                     </div>
                     <div class="form-group">
-                        <label>CMND : </label>
-                        <input type="text" class="form-control" name="CMND" id="CMND">
+                        <label>Id Card : </label>
+                        <input type="text" class="form-control" name="CMND" id="CMND" pattern="\d{9}|\d{12}" title="Format id card: xxxxxxxxx or xxxxxxxxxxxx">
                     </div>
                     <div class="form-group">
                         <label>Phone : </label>
-                        <input type="text" class="form-control" name="SDT" id="SDT">
+                        <input type="text" class="form-control" name="SDT" id="SDT" placeholder="09xx" pattern="(090|091)[\d]{7}" title="Phone number is not format ">
                     </div>
                     <div class="form-group">
                         <label>Email : </label>
-                        <input type="text" class="form-control" name="Email" id="Email">
+                        <input type="text" class="form-control" name="Email" id="Email" placeholder="abc@abc.abc" pattern="^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$" title="email is not format">
                     </div>
                     <div class="form-group">
                         <label>Address : </label>
@@ -313,23 +334,23 @@
                     </div>
                     <div class="form-group">
                         <label>Date of birth : </label>
-                        <input type="text" class="form-control" name="dateOfBirth" >
+                        <input type="text" class="form-control" name="dateOfBirth" placeholder="yyyy-mm-dd" pattern="(19[0-9][0-9]|20(00|01|02))-[0-9]{2}-[0-9]{2}">
                     </div>
                     <div class="form-group">
                         <label>ID Card : </label>
-                        <input type="text" class="form-control" name="CMND" >
+                        <input type="text" class="form-control" name="CMND" pattern="[\\d]{9}]|[\\d]{12}]" title="Format id card: xxxxxxxxx or xxxxxxxxxxxx">
                     </div>
                     <div class="form-group">
                         <label>Salary : </label>
-                        <input type="text" class="form-control" name="Salary" >
+                        <input type="text" class="form-control" name="Salary" pattern="[1-9]\d*" title="The number > 0">
                     </div>
                     <div class="form-group">
                         <label>Phone : </label>
-                        <input type="text" class="form-control" name="SDT" >
+                        <input type="text" class="form-control" name="SDT" placeholder="09xx" pattern="(090|091)[\d]{7}" title="Phone number is not format ">
                     </div>
                     <div class="form-group">
                         <label>Email : </label>
-                        <input type="text" class="form-control" name="Email" >
+                        <input type="text" class="form-control" name="Email" placeholder="abc@abc.abc" pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)" title="email is not format" >
                     </div>
                     <div class="form-group">
                         <label>Address : </label>
@@ -385,19 +406,19 @@
                     </div>
                     <div class="form-group">
                         <label>Area : </label>
-                        <input type="text" class="form-control" name="area" >
+                        <input type="text" class="form-control" name="area"  pattern="[1-9]\d*" title="The number > 0">
                     </div>
                     <div class="form-group">
                         <label>Number of floors : </label>
-                        <input type="text" class="form-control" name="floor" >
+                        <input type="text" class="form-control" name="floor"  pattern="[0-9]\d*" title="The number >= 0" >
                     </div>
                     <div class="form-group">
                         <label> Max People : </label>
-                        <input type="text" class="form-control" name="people" >
+                        <input type="text" class="form-control" name="people"  pattern="[0-9]\d*" title="The number >= 0" >
                     </div>
                     <div class="form-group">
                         <label>Cost : </label>
-                        <input type="text" class="form-control" name="cost" >
+                        <input type="text" class="form-control" name="cost"  pattern="[0-9]\d*" title="The number >= 0" >
                     </div>
                     <div class="form-group">
                         <label> Status : </label>
@@ -416,6 +437,105 @@
                         <select name="SerTypeId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <c:forEach var="serType" items="${listSerType}">
                                 <option value="${serType.id_loai_dich_vu}"><c:out value="${serType.ten_loai_dich_vu}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-primary" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<%--add new contract--%>
+<div id="addContractModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/HomeServlet?action=createContract" method="post">
+                <div class="modal-header" style="background: #2d3338">
+                    <h4 class="modal-title" style="color: #e9e9e9">Add New Contract</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Start Date:</label>
+                        <input type="text" class="form-control" name="startDate" placeholder="yyyy-mm-dd" pattern="(19[0-9][0-9]|20[0-9][0-9])-[0-9]{2}-[0-9]{2}">
+                    </div>
+                    <div class="form-group">
+                        <label>End Date : </label>
+                        <input type="text" class="form-control" name="endDate" placeholder="yyyy-mm-dd" pattern="((19[0-9][0-9]|20[0-9][0-9])-[0-9]{2}-[0-9]{2}">
+                    </div>
+                    <div class="form-group">
+                        <label>Deposic : </label>
+                        <input type="text" class="form-control" name="deposic"  pattern="[0-9]\d*" title="The number >= 0" >
+                    </div>
+                    <div class="form-group">
+                        <label>Total Money : </label>
+                        <input type="text" class="form-control" name="people"  pattern="[0-9]\d*" title="The number >= 0">
+                    </div>
+                    <div class="form-group">
+                        <label>Employee :</label>
+                        <select name="EmployeeId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="employee" items="${listEmp}">
+                                <option value="${employee.id_nhan_vien}"><c:out value="${employee.ho_ten}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Customer :</label>
+                        <select name="CustomerId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="customer" items="${listCus}">
+                                <option value="${customer.id_khach_hang}"><c:out value="${customer.ho_ten}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Service :</label>
+                        <select name="ServiceId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="service" items="${listSer}">
+                                <option value="${service.id_dich_vu}"><c:out value="${service.ten_dich_vu}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-primary" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%--add new contract detail--%>
+<div id="addContDetailModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/HomeServlet?action=createContractDetail" method="post">
+                <div class="modal-header" style="background: #2d3338">
+                    <h4 class="modal-title" style="color: #e9e9e9">Add New Contract Detail</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Quantily:</label>
+                        <input type="text" class="form-control" name="quantily" pattern="[0-9]\d*" title="The number >= 0" >
+                    </div>
+                    <div class="form-group">
+                        <label>Contract number :</label>
+                        <select name="ContractId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="contract" items="${listContract}">
+                                <option value="${contract.id_hop_dong}"><c:out value="${contract.id_hop_dong}"></c:out></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Attach Service :</label>
+                        <select name="ServiceId" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <c:forEach var="service" items="${listServiceAttach}">
+                                <option value="${service.id_dich_vu_di_kem}"><c:out value="${service.ten_dich_vu_di_kem}"></c:out></option>
                             </c:forEach>
                         </select>
                     </div>

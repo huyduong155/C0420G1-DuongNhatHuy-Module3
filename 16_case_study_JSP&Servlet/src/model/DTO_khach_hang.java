@@ -13,6 +13,11 @@ public class DTO_khach_hang {
     public DTO_khach_hang() {
     }
 
+    public DTO_khach_hang(int id_khach_hang, String ho_ten) {
+        this.id_khach_hang = id_khach_hang;
+        this.ho_ten = ho_ten;
+    }
+
     public DTO_khach_hang(int id_khach_hang, String ho_ten, String ngay_sinh, String CMND, String SDT, String email,
                           String dia_chi, String ten_loai_khach) {
         this.id_khach_hang = id_khach_hang;

@@ -2,6 +2,7 @@ package bo;
 
 import dao.KhachHangDao;
 import model.DTO_khach_hang;
+import model.DTO_khach_hang_dich_vu;
 import model.Khach_hang;
 import model.Loai_khach;
 
@@ -37,5 +38,10 @@ public class KhachHangBo implements IKhachHangBo {
     @Override
     public boolean deleteKhachHang(int id) {
         return khachHangDao.deleteKhachHang(id);
+    }
+
+    @Override
+    public List<DTO_khach_hang_dich_vu> selectAllKhachHangDichVu() {
+        return khachHangDao.selectAllKhachHangDichVu();
     }
 }

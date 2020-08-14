@@ -16,6 +16,11 @@ public class Nhan_vien {
     public Nhan_vien() {
     }
 
+    public Nhan_vien(int id_nhan_vien, String ho_ten) {
+        this.id_nhan_vien = id_nhan_vien;
+        this.ho_ten = ho_ten;
+    }
+
     public Nhan_vien(int id_nhan_vien, String ho_ten, String ngay_sinh, String CMND, String luong, String SDT,
                      String email, String dia_chi, int id_trinh_do, int id_vi_tri, int id_bo_phan) {
         this.id_nhan_vien = id_nhan_vien;
