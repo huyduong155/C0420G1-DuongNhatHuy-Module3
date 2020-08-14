@@ -181,6 +181,25 @@
             -webkit-justify-content: center;
         }
     </style>
+    <style>label{
+        margin-left: 20px;
+    }
+    .datepicker{
+        /*width:180px;*/
+        margin: 0 20px 20px 0px;
+    }
+    #datepicker > span:hover{
+        cursor: pointer;
+    }</style>
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker({
+                autoclose: true,
+                todayHighlight: true
+            }).datepicker('update', new Date());
+        });
+    </script>
+    <link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"><script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 </head>
 <body style="background-image: url('https://cdn.lifestyleasia.com/wp-content/uploads/2018/09/11142931/The-Nautilus-Maldives-Beach-Residence-exterior-1.jpg')">
 <div class="header">
@@ -292,7 +311,7 @@
                     </div>
                     <div class="form-group">
                         <label>Date of birth : </label>
-                        <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="yyyy-mm-dd" pattern="(19[0-9][0-9]|20(00|01|02))-[0-9]{2}-[0-9]{2}">
+                        <div class="input-group date datepicker" data-date-format="dd-mm-yyyy"> <input class="form-control" readonly="" type="text" name="dateOfBirth"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span></div>
                     </div>
                     <div class="form-group">
                         <label>ID Card : </label>

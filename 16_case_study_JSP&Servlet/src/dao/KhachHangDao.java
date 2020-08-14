@@ -9,6 +9,9 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,10 +97,19 @@ public class KhachHangDao implements IKhachHangDao{
 
     @Override
     public void insertKhachHang(Khach_hang khachHang) {
+        String ngay_sinh = khachHang.getNgay_sinh();
+        DateFormat from = new SimpleDateFormat("dd-MM-yyyy"); // current format
+        DateFormat to   = new SimpleDateFormat("yyyy-MM-dd"); // wanted format
+        String result = null;
+        try {
+            result = to.format(from.parse(ngay_sinh));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         try {
             PreparedStatement preparedStatement = this.baseDAO.getConnection().prepareStatement(INSERT_KH_SQL);
             preparedStatement.setString(1,khachHang.getHo_ten());
-            preparedStatement.setString(2,khachHang.getNgay_sinh());
+            preparedStatement.setString(2,result);
             preparedStatement.setString(3,khachHang.getCMND());
             preparedStatement.setString(4,khachHang.getSDT());
             preparedStatement.setString(5,khachHang.getEmail());
